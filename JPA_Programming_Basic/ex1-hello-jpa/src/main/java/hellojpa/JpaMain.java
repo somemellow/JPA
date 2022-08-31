@@ -13,11 +13,11 @@ public class JpaMain {
         tx.begin();
         try{
 
-            Member member1 = new Member(150L, "A");
-            Member member2 = new Member(160L, "B");
+            Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZ");
+//            em.persist(member); persist를 할 필요 없다 왜냐면 JPA는 객체를 자바 컬렉션 처럼 쓰기위하기 때문이다.
 
-            em.persist(member1);
-            em.persist(member2);
+            System.out.println("============================");
 
             tx.commit();    
         }catch(Exception e){
