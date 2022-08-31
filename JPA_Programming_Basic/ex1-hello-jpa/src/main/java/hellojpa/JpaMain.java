@@ -13,8 +13,11 @@ public class JpaMain {
         tx.begin();
         try{
 
-            Member findMember1 = em.find(Member.class, 101L);
-            Member findMember2 = em.find(Member.class, 101L);
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+
+            em.persist(member1);
+            em.persist(member2);
 
             tx.commit();    
         }catch(Exception e){
