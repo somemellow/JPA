@@ -29,11 +29,16 @@ public class JpaMain {
 //            findMember.setName("HelloJPA");
             //JPQL(객체지향 SQL)
             Member member = new Member();
-            member.setId(100L);
+            member.setId(101L);
             member.setName("HelloJPA");
             System.out.println("=== BEFORE ===");
             em.persist(member);
             System.out.println("=== BEFORE ===");
+
+            Member findMember = em.find(Member.class, 101L);
+
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getName() = " + findMember.getName());
 
             tx.commit();    
         }catch(Exception e){
