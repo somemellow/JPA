@@ -28,11 +28,12 @@ public class JpaMain {
 //            Member findMember = em.find(Member.class, 1L);
 //            findMember.setName("HelloJPA");
             //JPQL(객체지향 SQL)
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .getResultList();
-            for(Member member : result){
-                System.out.println("member.getName() = " + member.getName());
-            }
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("HelloJPA");
+            System.out.println("=== BEFORE ===");
+            em.persist(member);
+            System.out.println("=== BEFORE ===");
 
             tx.commit();    
         }catch(Exception e){
