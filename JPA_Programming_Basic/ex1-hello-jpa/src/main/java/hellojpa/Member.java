@@ -7,25 +7,17 @@ import java.util.Date;
 @Table(name = "MBR")
 public class Member {
     public Member(){}
-
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name", nullable = false)
+    private String Username;
 
-    @Column(name = "name")
-    private String username;
+    public String getUsername() {
+        return Username;
+    }
 
-    private Integer age;
-
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob
-    private String description;
-
+    public void setUsername(String username) {
+        Username = username;
+    }
 }
