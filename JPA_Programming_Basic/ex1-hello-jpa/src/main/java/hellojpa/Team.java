@@ -11,7 +11,8 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name="TEAM_ID")
     List<Member> members = new ArrayList<Member>();
 
     public List<Member> getMembers() {
@@ -38,8 +39,4 @@ public class Team {
         this.name = name;
     }
 
-    public void addMember(Member member) {
-        member.setTeam(this);
-        members.add(member);
-    }
 }
