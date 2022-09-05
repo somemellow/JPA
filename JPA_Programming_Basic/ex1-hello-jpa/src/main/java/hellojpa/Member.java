@@ -14,7 +14,8 @@ public class Member {
     private String Username;
 //    @Column(name= "TEMA_ID")
 //    private Long teamId;
-    @ManyToOne @JoinColumn(name="TEAM_ID")
+    @ManyToOne // Member 입장에선 many
+    @JoinColumn(name="TEAM_ID")
     private Team team;
 
     public Team getTeam() {
