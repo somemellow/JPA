@@ -20,9 +20,8 @@ public class Member {
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
-    @ManyToMany
-    @JoinTable(name="MEMEBER_PRODUCT")
-    private List<Product> products = new ArrayList<Product>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<MemberProduct>() ;
     public Long getId() {
         return id;
     }
