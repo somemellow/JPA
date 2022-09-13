@@ -160,5 +160,8 @@ public class QuerydslBasicTest {
                 .limit(2)
                 .fetchResults();
         assertThat(queryResults.getTotal()).isEqualTo(4);
+        assertThat(queryResults.getLimit()).isEqualTo(2);
+        assertThat(queryResults.getOffset()).isEqualTo(1);
+        assertThat(queryResults.getResults().size()).isEqualTo(2);
     }
 }
