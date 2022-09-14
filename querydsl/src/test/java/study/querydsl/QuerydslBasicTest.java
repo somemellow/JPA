@@ -213,7 +213,7 @@ public class QuerydslBasicTest {
     public void join(){
         List<Member> result = queryFactory
                 .selectFrom(member)
-                .join(member.team, team)
+                .leftJoin(member.team, team)
                 .where(team.name.eq("teamA"))
                 .fetch();
         assertThat(result)
