@@ -33,4 +33,3 @@ class MemberRepositoryTest {
         assertThat(result2).containsExactly(member);
 
     }
-}
