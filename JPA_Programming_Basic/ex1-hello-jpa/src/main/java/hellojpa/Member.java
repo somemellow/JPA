@@ -1,12 +1,12 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
-public class Member {
+public class Member extends BaseEntity{
     @Id
     @GeneratedValue @Column(name="MEMBER_ID")
     private Long id;
@@ -21,7 +21,8 @@ public class Member {
     private Locker locker;
 
     @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<MemberProduct>() ;
+    private List<MemberProduct> memberProducts = new ArrayList<MemberProduct>();
+
     public Long getId() {
         return id;
     }
