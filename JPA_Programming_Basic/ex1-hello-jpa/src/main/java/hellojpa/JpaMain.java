@@ -23,8 +23,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie);
+            Member findMember = em.find(Member.class, member.getId());
+            System.out.println("findMovie = " + findMember);
 
             tx.commit();
         }catch(Exception e){
