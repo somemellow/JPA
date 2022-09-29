@@ -19,7 +19,8 @@ public class JpaMain {
            Book book = new Book();
            book.setName("JPA");
            book.setAuthor("kimyounghan");
-            tx.commit();
+           em.persist(book);
+           tx.commit();
         }catch(Exception e){
             tx.rollback();
         }finally {

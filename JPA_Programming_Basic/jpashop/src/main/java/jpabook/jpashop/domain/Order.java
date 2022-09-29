@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "ORERS")
 public class Order {
     @Id @GeneratedValue
     @Column(name ="ORDER_ID")
