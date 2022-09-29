@@ -39,4 +39,11 @@ public class Member extends BaseEntity{
         Username = username;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }

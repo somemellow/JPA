@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,27 +14,24 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-
-           Member member = new Member();
-           member.setUsername("user1");
-           member.setCreateBy("Kim");
-           member.setCreateDate(LocalDateTime.now());
-
-            em.persist(member);
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            em.persist(member1);
 
             em.flush();
             em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMovie = " + findMember);
-
+            Member refMember = em.getReference(Member.class, member1.getId());
+            System.out.println("refMember.getClass() = " + refMember.getClass());
+            refMember.getUsername();// 강제 초기화
+            Hibernate.initialize(refMember);
             tx.commit();
         }catch(Exception e){
             tx.rollback();
+            e.printStackTrace();
         }finally {
             em.close();            
         }
-        
         emf.close();
     }
 }
