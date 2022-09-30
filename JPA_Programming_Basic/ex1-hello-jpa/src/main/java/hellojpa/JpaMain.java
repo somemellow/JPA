@@ -14,17 +14,24 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+            
             Member member1 = new Member();
             member1.setUsername("member1");
+            member1.setTeam(team);
             em.persist(member1);
-
+            
             em.flush();
             em.clear();
 
-            Member refMember = em.getReference(Member.class, member1.getId());
-            System.out.println("refMember.getClass() = " + refMember.getClass());
-            refMember.getUsername();// 강제 초기화
-            Hibernate.initialize(refMember);
+            Member m = em.getReference(Member.class, member1.getId());
+            System.out.println("m.getTeam().getClass() = " + m.getTeam().getClass());
+
+            System.out.println("=================");
+            System.out.println("m.getTeam().getName() = " + m.getTeam().getName());
+            System.out.println("=================");
             tx.commit();
         }catch(Exception e){
             tx.rollback();
