@@ -6,22 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member extends BaseEntity{
+public class Member {
     @Id
     @GeneratedValue @Column(name="MEMBER_ID")
     private Long id;
     @Column(name = "USERNAME")
     private String Username;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Team team;
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
-
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<MemberProduct>();
+    //period
+    @Embedded
+    private Period workPeriod;
+    //address
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+                    column=@Column(name = "WORK_CITY")),
+            @AttributeOverride(name="street",
+                    column=@Column(name = "WORK_STREET")),
+            @AttributeOverride(name="zipcode",
+                    column=@Column(name = "WORK_ZIPCODE"))
+    })
+    private Address honmeAddress;
 
     public Long getId() {
         return id;
@@ -39,11 +44,19 @@ public class Member extends BaseEntity{
         Username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public Period getWorkPeriod() {
+        return workPeriod;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public Address getHonmeAddress() {
+        return honmeAddress;
+    }
+
+    public void setHonmeAddress(Address honmeAddress) {
+        this.honmeAddress = honmeAddress;
     }
 }
