@@ -26,7 +26,7 @@ public class Member {
             @AttributeOverride(name="zipcode",
                     column=@Column(name = "WORK_ZIPCODE"))
     })
-    private Address honmeAddress;
+    private Address homeAddress;
 
     public Long getId() {
         return id;
@@ -52,11 +52,11 @@ public class Member {
         this.workPeriod = workPeriod;
     }
 
-    public Address getHonmeAddress() {
-        return honmeAddress;
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setHonmeAddress(Address honmeAddress) {
-        this.honmeAddress = honmeAddress;
+    public void setHomeAddress(Address honmeAddress) {
+        this.homeAddress = honmeAddress;
     }
 }
