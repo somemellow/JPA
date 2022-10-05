@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -14,15 +15,33 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            Address address = new Address("city", "street", "zipcode");
-
             Member member =new Member();
             member.setUsername("member1");
-            member.setHomeAddress(address);
+            member.setHomeAddress(new Address("homeCity", "street","zipcode"));
+
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("pizza");
+
+            member.getAddressHistory().add(new Address("old1", "street","zipcode"));
+            member.getAddressHistory().add(new Address("old2", "street","zipcode"));
+
             em.persist(member);
 
-            Address newAddress = new Address(address.getCity(),address.getStreet(),address.getZipcode());
-            member.setHomeAddress(newAddress);
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+
+            List<Address> addressHistory = findMember.getAddressHistory();
+            for (Address address : addressHistory) {
+                System.out.println("address.getCity() = " + address.getCity());
+            }
+
+            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+            for (String favoriteFood: favoriteFoods) {
+                System.out.println("favoriteFood = " + favoriteFood);
+            }
 
             tx.commit();
         }catch(Exception e){
