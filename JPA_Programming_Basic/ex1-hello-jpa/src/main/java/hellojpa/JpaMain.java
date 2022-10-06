@@ -19,7 +19,7 @@ public class JpaMain {
         tx.begin();
         try{
             String sql = "SELECT MEMBER_ID, city, street, zipcode, Username FROM MEMBER";
-            List<Member> resultList = em.createQuery(sql, Member.class).getResultList();
+            List<Member> resultList = em.createNamedQuery(sql, Member.class).getResultList();
 
             tx.commit();
         }catch(Exception e){
