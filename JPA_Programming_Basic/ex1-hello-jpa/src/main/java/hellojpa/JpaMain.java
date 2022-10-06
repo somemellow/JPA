@@ -18,15 +18,10 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
+            String sql = "SELECT MEMBER_ID, city, street, zipcode, Username FROM MEMBER";
+            List<Member> resultList = em.createQuery(sql, Member.class).getResultList();
 
-            //JPQL
-            //select m from Member m where m.age > 18
-            JPAFactoryQuery query = new JPAQueryFactory(em);
-            QMember m = QMember.member;
-
-            List<Member> list = query.selectFrom(m).where(m.age.gt(18)) .orderBy(m.name.desc()).fetch();
             tx.commit();
-
         }catch(Exception e){
             tx.rollback();
             e.printStackTrace();
