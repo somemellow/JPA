@@ -19,18 +19,14 @@ public class JpaMain {
         tx.begin();
         try{
 
-            //Criteria 사용 준비 
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+            //JPQL
+            //select m from Member m where m.age > 18
+            JPAFactoryQuery query = new JPAQueryFactory(em);
+            QMember m = QMember.member;
 
-            //루트 클래스 (조회를 시작할 클래스) 
-            Root<Member> m = query.from(Member.class);
-
-            //쿼리 생성
-            CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("username"), "kim"));
-            List<Member> resultList = em.createQuery(cq).getResultList();
-
+            List<Member> list = query.selectFrom(m).where(m.age.gt(18)) .orderBy(m.name.desc()).fetch();
             tx.commit();
+
         }catch(Exception e){
             tx.rollback();
             e.printStackTrace();
