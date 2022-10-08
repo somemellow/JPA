@@ -19,8 +19,14 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List<Order> result = em.createQuery("select o.address from Order o", Order.class)
-                    .getResultList();
+            List resultList = em.createQuery("select m.username, m.age from Member m")
+                     .getResultList();
+            Object o = resultList.get(0);
+            Object[] result = (Object[]) o;
+
+            System.out.println("result[0] = " + result[0]);
+            System.out.println("result[1] = " + result[1]);
+
             tx.commit();
         }catch(Exception e){
             tx.rollback();
