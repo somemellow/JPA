@@ -16,12 +16,14 @@ public class JpaMain {
             member.setAge(10);
             em.persist(member);
 
-            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
-            List<Member> resultList = query.getResultList();
+            em.flush();
+            em.clear();
 
-            for (Member member1: resultList) {
-                System.out.println("member1 = " + member1);
-            }
+            List<Member> result = em.createQuery("select m from Member m", Member.class)
+                    .getResultList();
+
+            Member findMember = result.get(0);
+            findMember.setAge(20);
 
             tx.commit();
         }catch(Exception e){
