@@ -19,12 +19,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List<Member> result = em.createQuery("select m from Member m", Member.class)
+            List<Order> result = em.createQuery("select o.address from Order o", Order.class)
                     .getResultList();
-
-            Member findMember = result.get(0);
-            findMember.setAge(20);
-
             tx.commit();
         }catch(Exception e){
             tx.rollback();
