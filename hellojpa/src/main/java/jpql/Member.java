@@ -16,6 +16,16 @@ public class Member {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
+
+    public MemberType getType() {
+        return type;
+    }
+
+    public void setType(MemberType type) {
+        this.type = type;
+    }
 
     public void changeTeam(Team team){
         this.team = team;
