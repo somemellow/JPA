@@ -16,8 +16,9 @@ public class JpaMain {
             em.persist(team);
 
             Member member = new Member();
-            member.setUsername("member1");
+            member.setUsername("teamA");
             member.setAge(10);
+
             member.setTeam(team);
             em.persist(member);
 
@@ -25,10 +26,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m, Team t where m.username = t.name";
+            String query = "select m from Member m LEFT JOIN m.team t on t.name = 'teamA'";
             List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
+            System.out.println("result.size() = " + result.size());
             tx.commit();
         }catch(Exception e){
             tx.rollback();
