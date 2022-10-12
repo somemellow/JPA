@@ -39,12 +39,9 @@ public class JpaMain {
             em.clear();
 
             String query = "select m from Member m where m.team.id = :teamId";
-            List<Member> result = em.createNamedQuery("Member.findByUsername", Member.class)
-                    .setParameter("username", "회원1")
-                    .getResultList();
-            for (Member member : result) {
-                System.out.println("result = " + result);
-            }
+            int resultCount = em.createQuery("UPDATE Member m set m.age = 20")
+                    .executeUpdate();
+            System.out.println("resultCount = " + resultCount);
             tx.commit();
         }catch(Exception e){
             tx.rollback();
